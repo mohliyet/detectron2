@@ -18,11 +18,12 @@ It supports a number of computer vision research projects and production applica
 
 ## Learn More about Detectron2
 
-Explain Like I’m 5: Detectron2            |  Using Machine Learning with Detectron2
-:-------------------------:|:-------------------------:
-[![Explain Like I’m 5: Detectron2](https://img.youtube.com/vi/1oq1Ye7dFqc/0.jpg)](https://www.youtube.com/watch?v=1oq1Ye7dFqc)  |  [![Using Machine Learning with Detectron2](https://img.youtube.com/vi/eUSgtfK4ivk/0.jpg)](https://www.youtube.com/watch?v=eUSgtfK4ivk)
+|                                              Explain Like I’m 5: Detectron2                                              |                                              Using Machine Learning with Detectron2                                              |
+| :------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
+| [![Explain Like I’m 5: Detectron2](https://img.youtube.com/vi/1oq1Ye7dFqc/0.jpg)](https://www.youtube.com/watch?v=1oq1Ye7dFqc) | [![Using Machine Learning with Detectron2](https://img.youtube.com/vi/eUSgtfK4ivk/0.jpg)](https://www.youtube.com/watch?v=eUSgtfK4ivk) |
 
 ## What's New
+
 * Includes new capabilities such as panoptic segmentation, Densepose, Cascade R-CNN, rotated bounding boxes, PointRend,
   DeepLab, ViTDet, MViTv2 etc.
 * Used as a library to support building [research projects](projects/) on top of it.
