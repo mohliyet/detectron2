@@ -45,12 +45,12 @@ model_ts*.txt
 _darcs
 
 # project dirs
-/detectron2/model_zoo/configs
-/datasets/*
-!/datasets/*.*
-/projects/*/datasets
-/models
-/snippet
+# /detectron2/model_zoo/configs
+# /datasets/*
+# !/datasets/*.*
+# /projects/*/datasets
+# /models
+# /snippet
 
 # data dirs
 balloon_dataset.zip
