@@ -276,7 +276,7 @@ class DefaultPredictor:
         inputs = cv2.imread("input.jpg")
         outputs = pred(inputs)
     """
-
+    print('I am here')
     def __init__(self, cfg):
         self.cfg = cfg.clone()  # cfg can be modified by model
         self.model = build_model(self.cfg)
@@ -316,7 +316,11 @@ class DefaultPredictor:
 
             inputs = {"image": image, "height": height, "width": width}
 
+            # print('i am here #1 before prediction!')
+            # print(self.model([inputs]))
             predictions = self.model([inputs])[0]
+            print(self.model([inputs]))
+            # print('i am here #2 after prediction!')
             return predictions
 
 
