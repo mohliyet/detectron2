@@ -644,6 +644,9 @@ class StandardROIHeads(ROIHeads):
             cfg, ShapeSpec(channels=in_channels, height=pooler_resolution, width=pooler_resolution)
         )
         box_predictor = FastRCNNOutputLayers(cfg, box_head.output_shape)
+        # print(box_predictor)
+
+        # print('I was here in the roi_heads.py!')
         return {
             "box_in_features": in_features,
             "box_pooler": box_pooler,
