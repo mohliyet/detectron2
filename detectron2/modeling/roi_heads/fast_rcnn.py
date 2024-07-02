@@ -138,7 +138,7 @@ def fast_rcnn_inference_single_image(
     if not valid_mask.all():
         boxes = boxes[valid_mask]
         scores = scores[valid_mask]
-
+    all_scores = scores.clone()
     scores = scores[:, :-1]
     num_bbox_reg_classes = boxes.shape[1] // 4
     # Convert to Boxes to use the `clip` function ...
@@ -157,18 +157,24 @@ def fast_rcnn_inference_single_image(
     else:
         boxes = boxes[filter_mask]
     scores = scores[filter_mask]
+    # print(scores.shape)
 
     # 2. Apply NMS for each class independently.
     keep = batched_nms(boxes, scores, filter_inds[:, 1], nms_thresh)
     if topk_per_image >= 0:
         keep = keep[:topk_per_image]
     boxes, scores, filter_inds = boxes[keep], scores[keep], filter_inds[keep]
-    # print('i was here inside the fast rcnn file.')
+    # print(scores.shape)
+    # print(filter_inds)
     result = Instances(image_shape)
     result.pred_boxes = Boxes(boxes)
     result.scores = scores
     result.pred_classes = filter_inds[:, 1]
+    # print(result.scores)
+    result.all_classes = all_scores[filter_inds[:,0]]
     return result, filter_inds[:, 0]
+
+
 
 
 class FastRCNNOutputLayers(nn.Module):
