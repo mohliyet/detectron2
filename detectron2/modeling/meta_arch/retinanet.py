@@ -294,6 +294,7 @@ class RetinaNet(DenseDetector):
         Returns:
             Same as `inference`, but for only one image.
         """
+        print(box_cls[0].shape)
         pred = self._decode_multi_level_predictions(
             anchors,
             box_cls,
@@ -305,6 +306,7 @@ class RetinaNet(DenseDetector):
         keep = batched_nms(  # per-class NMS
             pred.pred_boxes.tensor, pred.scores, pred.pred_classes, self.test_nms_thresh
         )
+        # print(len(keep.tolist()))
         return pred[keep[: self.max_detections_per_image]]
 
 

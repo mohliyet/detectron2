@@ -207,6 +207,7 @@ class DenseDetector(nn.Module):
         Returns:
             Instances: with field "scores", "pred_boxes", "pred_classes".
         """
+        print('all the fixes need to be addressed here in the function _decode_per_level_predictions which is found under detectron2/detectron2/modeling/meta_arch/dense_detector.py')
         # Apply two filtering to make NMS faster.
         # 1. Keep boxes with confidence score higher than threshold
         keep_idxs = pred_scores > score_thresh
@@ -244,6 +245,7 @@ class DenseDetector(nn.Module):
         """
         Run `_decode_per_level_predictions` for all feature levels and concat the results.
         """
+        print('you are probably coming to here!')
         predictions = [
             self._decode_per_level_predictions(
                 anchors_i,
