@@ -207,10 +207,11 @@ class DenseDetector(nn.Module):
         Returns:
             Instances: with field "scores", "pred_boxes", "pred_classes".
         """
-        print('all the fixes need to be addressed here in the function _decode_per_level_predictions which is found under detectron2/detectron2/modeling/meta_arch/dense_detector.py')
+        # print('all the fixes need to be addressed here in the function _decode_per_level_predictions which is found under detectron2/detectron2/modeling/meta_arch/dense_detector.py')
         # Apply two filtering to make NMS faster.
         # 1. Keep boxes with confidence score higher than threshold
         keep_idxs = pred_scores > score_thresh
+        pred_scores_all = pred_scores.clone()
         pred_scores = pred_scores[keep_idxs]
         topk_idxs = torch.nonzero(keep_idxs)  # Kx2
 
@@ -225,12 +226,13 @@ class DenseDetector(nn.Module):
         topk_idxs = topk_idxs[idxs]
 
         anchor_idxs, classes_idxs = topk_idxs.unbind(dim=1)
-
+        # print(pred_scores.shape)
+        # print(pred_scores_all[anchor_idxs].shape)
         pred_boxes = self.box2box_transform.apply_deltas(
             pred_deltas[anchor_idxs], anchors.tensor[anchor_idxs]
         )
         return Instances(
-            image_size, pred_boxes=Boxes(pred_boxes), scores=pred_scores, pred_classes=classes_idxs
+            image_size, pred_boxes=Boxes(pred_boxes), scores=pred_scores, scores_all= pred_scores_all[anchor_idxs], pred_classes=classes_idxs
         )
 
     def _decode_multi_level_predictions(
@@ -245,7 +247,7 @@ class DenseDetector(nn.Module):
         """
         Run `_decode_per_level_predictions` for all feature levels and concat the results.
         """
-        print('you are probably coming to here!')
+        # print('you are probably coming to here!')
         predictions = [
             self._decode_per_level_predictions(
                 anchors_i,
@@ -258,6 +260,7 @@ class DenseDetector(nn.Module):
             # Iterate over every feature level
             for box_cls_i, box_reg_i, anchors_i in zip(pred_scores, pred_deltas, anchors)
         ]
+        # print(predictions)
         return predictions[0].cat(predictions)  # 'Instances.cat' is not scriptale but this is
 
     def visualize_training(self, batched_inputs, results):
