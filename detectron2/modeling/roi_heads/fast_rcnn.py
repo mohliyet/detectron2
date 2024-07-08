@@ -171,7 +171,7 @@ def fast_rcnn_inference_single_image(
     result.scores = scores
     result.pred_classes = filter_inds[:, 1]
     # print(result.scores)
-    result.all_classes = all_scores[filter_inds[:,0]]
+    result.scores_all = all_scores[filter_inds[:,0]]
     return result, filter_inds[:, 0]
 
 
